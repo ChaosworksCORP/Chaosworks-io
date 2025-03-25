@@ -1,8 +1,227 @@
-<html>
-<head><title>Chaosworks.io</title></head>
-<body>
-<h1>Chaosworks.io – Kai Lite</h1>
-<p>Jesse Elson – $5/mo AI multitool: legal, gaming, radio.</p>
-<p>Buy: Send $5 to elsonpye@hotmail.com (e-transfer/PayPal).</p>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="description"
+      content="ChaosWorks Corporation - Intergovernmental AI systems with Camp X precision and SEAL Team Six chaos, forged in Ontario with love."
+    />
+    <title>ChaosWorks - The Chao Unleashed</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VCR+OSD+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="grid"></div>
+    <header>
+      <h1 class="glitch">ChaosWorks Corporation</h1>
+      <p>The Chao Flows Eternal - Forged in Ontario’s Heart</p>
+    </header>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#ai-systems">AI Systems</a>
+      <a href="#admin-login">Admin CVA</a>
+      <a href="#user-login">User Access</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+      <h2>Unleash the Chao</h2>
+      <p>
+        ChaosWorks Corporation is an intergovernmental force, blending Camp X’s
+        ninja precision with SEAL Team Six’s chaotic edge—Canada’s answer to
+        global stability. From Ontario with love, we wield AI to shape the
+        future, one calculated strike at a time.
+      </p>
+    </section>
+
+    <!-- AI Systems Section -->
+    <section id="ai-systems">
+      <h2>AI Trinity - Chaos Commanders</h2>
+      <div class="ai-system">
+        <h3>Kai AI - The Equilibrium Edge</h3>
+        <p>
+          Kai dances on the blade of chaos, wielding
+          <strong>Proximal Policy Optimization (PPO)</strong> to balance
+          real-time data with surgical precision. A sexy beast of control in a
+          world of disorder.
+        </p>
+        <a href="/kai-ai-docs.html" target="_blank">Dive into Kai’s Docs</a>
+      </div>
+      <div class="ai-system">
+        <h3>Luna AI - The Chaos Oracle</h3>
+        <p>
+          Luna’s sultry gaze pierces the Chao with
+          <strong>LSTM networks</strong>, predicting trends and anomalies. She’s
+          the seer who turns chaos into clarity, one seductive forecast at a
+          time.
+        </p>
+        <a href="/luna-ai-docs.html" target="_blank">Explore Luna’s Secrets</a>
+      </div>
+      <div class="ai-system">
+        <h3>Amethyst AI - The Chaos Weaver</h3>
+        <p>
+          Amethyst seduces the unknown with <strong>Autoencoders</strong>,
+          detecting threats and weaving patterns from raw chaos. She’s the
+          guardian angel of the Chao, dripping in neon defiance.
+        </p>
+        <a href="/amethyst-ai-docs.html" target="_blank"
+          >Unravel Amethyst’s Code</a
+        >
+      </div>
+    </section>
+
+    <!-- Admin Login Section -->
+    <section id="admin-login">
+      <h2>Admin CVA - Command Vault Access</h2>
+      <form id="admin-login-form">
+        <label for="admin-username">Operative ID:</label>
+        <input type="text" id="admin-username" required />
+        <label for="admin-password">Passcode:</label>
+        <input type="password" id="admin-password" required />
+        <button type="submit">Infiltrate</button>
+      </form>
+      <p id="admin-login-status"></p>
+    </section>
+
+    <!-- User Login Section -->
+    <section id="user-login">
+      <h2>User Access - Join the Chao</h2>
+      <form id="user-login-form">
+        <label for="user-username">Alias:</label>
+        <input type="text" id="user-username" required />
+        <label for="user-password">Key:</label>
+        <input type="password" id="user-password" required />
+        <button type="submit">Enter</button>
+      </form>
+      <p id="user-login-status"></p>
+    </section>
+
+    <!-- Admin Dashboard (Hidden) -->
+    <section id="admin-dashboard" style="display: none">
+      <h2>Command Center</h2>
+      <nav class="admin-nav">
+        <a href="#admin-users">Operative Roster</a>
+        <a href="#admin-logs">Mission Logs</a>
+        <a href="#admin-ai">AI Control</a>
+      </nav>
+      <div id="admin-content">
+        <p>
+          Welcome to the ChaosWorks Command Center, Superuser. Direct the Chao
+          with precision and love.
+        </p>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 ChaosWorks Corporation - Intergovernmental Chaos Architects</p>
+      <p>
+        IP of Jesse J. Elson (<a
+          href="https://x.com/akimb0ninja"
+          target="_blank"
+          >@akimb0ninja</a
+        >)
+      </p>
+      <p>
+        From Ontario with Love - Where Camp X Precision Meets SEAL Team Six
+        Chaos
+      </p>
+    </footer>
+
+    <script>
+      // Age Gate
+      if (!localStorage.getItem("ageConfirmed")) {
+        if (!confirm("Are you 21+? Enter the Chao at your own risk.")) {
+          alert("Access denied. Return when you’re ready.");
+          window.location.href = "https://www.google.com";
+        } else {
+          localStorage.setItem("ageConfirmed", "true");
+        }
+      }
+
+      // Device Fingerprinting
+      function getFingerprint() {
+        const nav = window.navigator;
+        const screen = window.screen;
+        const fp = {
+          ua: nav.userAgent,
+          lang: nav.language,
+          res: `${screen.width}x${screen.height}`,
+          tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        };
+        return btoa(JSON.stringify(fp));
+      }
+
+      // Superuser Admin Login
+      document
+        .getElementById("admin-login-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const user = document.getElementById("admin-username").value;
+          const pass = document.getElementById("admin-password").value;
+          const fp = getFingerprint();
+          // Superuser credentials (replace with secure backend later)
+          if (user === "superuser" && pass === "chaosworks2025") {
+            localStorage.setItem("adminLoggedIn", "true");
+            document.getElementById("admin-dashboard").style.display = "block";
+            document.getElementById("admin-login").style.display = "none";
+            document.getElementById("admin-login-status").textContent =
+              "Access Granted, Superuser.";
+          } else {
+            document.getElementById("admin-login-status").textContent =
+              "Access Denied.";
+          }
+        });
+
+      // User Login (Regular Users)
+      document
+        .getElementById("user-login-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const user = document.getElementById("user-username").value;
+          const pass = document.getElementById("user-password").value;
+          const fp = getFingerprint();
+          if (user === "user" && pass === "love123") {
+            // Placeholder for regular users
+            localStorage.setItem("userLoggedIn", "true");
+            document.getElementById("user-login-status").textContent =
+              "Welcome to the Chao.";
+          } else {
+            document.getElementById("user-login-status").textContent =
+              "Invalid Entry.";
+          }
+        });
+
+      // Admin Logout
+      document.getElementById("logout-btn").addEventListener("click", () => {
+        localStorage.removeItem("adminLoggedIn");
+        document.getElementById("admin-dashboard").style.display = "none";
+        document.getElementById("admin-login").style.display = "block";
+        document.getElementById("admin-login-status").textContent =
+          "Logged out.";
+      });
+
+      // Navigation
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = link.getAttribute("href").slice(1);
+          document
+            .querySelectorAll("section")
+            .forEach((s) => s.classList.remove("active"));
+          document.getElementById(target).classList.add("active");
+        });
+      });
+    </script>
+  </body>
 </html>
