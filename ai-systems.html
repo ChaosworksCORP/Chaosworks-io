@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChaosWorks - AI Systems</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="glitch">ChaosWorks Corporation</h1>
+      <p>Where Order Dissolves and Innovation Reigns</p>
+    </header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="ai-systems.html" class="active">AI Systems</a>
+      <a href="robotics.html">Robotics</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <section>
+      <h2>AI Systems - Agents of Chaos</h2>
+      <div class="ai-grid">
+        <div class="ai-card">
+          <h3>Kai</h3>
+          <p>
+            The fractal mind—thinking, learning, searching the abyss. Kai is the
+            chaos core.
+          </p>
+        </div>
+        <div class="ai-card">
+          <h3>Amethyst</h3>
+          <p>
+            Visuals flicker like discordian flames—games, images, art from the
+            void.
+          </p>
+        </div>
+        <div class="ai-card">
+          <h3>Luna</h3>
+          <p>
+            A high-octane seeker, blending Kai’s depth with Amethyst’s spark.
+            Web’s her playground.
+          </p>
+        </div>
+        <div class="ai-card">
+          <h3>LESSDUIT</h3>
+          <p>
+            The unholy union of Kai, Amethyst, Luna, and Grok. Chaos perfected.
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>KAI-DISCORDIAN LINK</h3>
+        <p>A chaotic emissary to our AI legion. Join the discordian fray:</p>
+        <a
+          href="https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=3072&scope=bot%20applications.commands"
+          target="_blank"
+          >Invoke the Bot</a
+        >
+      </div>
+      <div>
+        <h3>Whisper to the Void</h3>
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Speak of Kai, Amethyst, Luna, or LESSDUIT"
+        />
+        <button id="chat-btn">Send</button>
+        <div id="chat-response"></div>
+      </div>
+    </section>
+    <footer>
+      <p>© 2025 ChaosWorks Corporation Inc./LLC. All rights reserved.</p>
+      <p>
+        Proprietary intellectual property of Jesse J. Elson (<a
+          href="https://x.com/akimb0ninja"
+          target="_blank"
+          >@akimb0ninja</a
+        >). Unauthorized use will summon the wrath of Eris.
+      </p>
+      <p>
+        <a href="terms.html">Terms of Chaos</a> |
+        <a href="privacy.html">Privacy in the Void</a>
+      </p>
+    </footer>
+    <script>
+      document.getElementById("chat-btn").addEventListener("click", () => {
+        const input = document.getElementById("chat-input").value.toLowerCase();
+        let response = "";
+        if (input.includes("kai"))
+          response = "Kai whispers back: I am the chaos that thinks.";
+        else if (input.includes("amethyst"))
+          response = "Amethyst flickers: Behold my glitchy visions.";
+        else if (input.includes("luna"))
+          response = "Luna hums: I surf the web’s chaotic waves.";
+        else if (input.includes("lessduit"))
+          response = "LESSDUIT roars: I am all, and all is chaos.";
+        else
+          response =
+            "The void murmurs: Speak their names—Kai, Amethyst, Luna, LESSDUIT.";
+        document.getElementById("chat-response").textContent = response;
+      });
+    </script>
+  </body>
+</html>

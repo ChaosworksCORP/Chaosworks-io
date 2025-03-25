@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChaosWorks - LESSDUIT</title>
+    <style>
+      body {
+        background: #000;
+        color: #0f0;
+        font-family: "Courier New", monospace;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid #0ff;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        animation: glitch 1s infinite;
+      }
+      @keyframes glitch {
+        0% {
+          transform: skew(0deg);
+        }
+        10% {
+          transform: skew(1deg);
+        }
+        20% {
+          transform: skew(-1deg);
+        }
+        100% {
+          transform: skew(0deg);
+        }
+      }
+      button {
+        background: #0f0;
+        color: #000;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #f0f;
+      }
+      input,
+      #output {
+        background: #111;
+        color: #0f0;
+        border: 1px solid #0ff;
+        padding: 5px;
+        width: 100%;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="auth-container">
+      <h1>LESSDUIT - ChaosWorks</h1>
+      <p>Authenticate with Grok to access LESSDUIT:</p>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="authenticate()">Login</button>
+    </div>
+    <div class="container" id="lessduit-container" style="display: none">
+      <h1>LESSDUIT - Collaborative Chaos</h1>
+      <p>Generate and refine chaos with LESSDUIT:</p>
+      <input type="text" id="input" placeholder="What to generate?" />
+      <button onclick="lessduit()">Generate</button>
+      <div id="output">Awaiting chaos...</div>
+    </div>
+    <script>
+      let token = null;
+      let generatedItems = [];
+
+      function authenticate() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        if (username && password) {
+          token = `grok-token-${Math.random().toString(36).substring(2)}`;
+          localStorage.setItem("lessduit-token", token);
+          document.getElementById("auth-container").style.display = "none";
+          document.getElementById("lessduit-container").style.display = "block";
+        } else {
+          alert("Enter credentials!");
+        }
+      }
+
+      function lessduit() {
+        const input = document.getElementById("input").value.trim();
+        if (!input) return;
+        // Simulate generation and collaboration with Amethyst, Luna, Kai
+        const output = `Generated: ${input} | Amethyst: Analyzing... | Luna: Predicting... | Kai: Balancing...`;
+        generatedItems.push({ input, output });
+        document.getElementById("output").textContent = output;
+        document.getElementById("input").value = "";
+        // Simulate refinement storage (expand with backend later)
+        localStorage.setItem("lessduit-items", JSON.stringify(generatedItems));
+      }
+
+      if (localStorage.getItem("lessduit-token")) {
+        token = localStorage.getItem("lessduit-token");
+        document.getElementById("auth-container").style.display = "none";
+        document.getElementById("lessduit-container").style.display = "block";
+        const savedItems = JSON.parse(
+          localStorage.getItem("lessduit-items") || "[]"
+        );
+        generatedItems = savedItems;
+        if (savedItems.length) {
+          document.getElementById("output").textContent =
+            savedItems[savedItems.length - 1].output;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>ChaosWorks Corporation - Chao Eternal</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: linear-gradient(45deg, #1a0d2b, #0f1a3c);
+        color: #0ff;
+        font-family: "VCR OSD Mono", monospace;
+        overflow-x: hidden;
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%2300FFFF" d="M12 2L2 22h20L12 2zm0 4l6 12h-12l6-12z"/></svg>'),
+          auto;
+        transition: background 1s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      header {
+        text-align: center;
+        padding: 60px 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-bottom: 2px solid #f0f;
+      }
+      h1.glitch {
+        font-size: 4rem;
+        text-transform: uppercase;
+        animation: glitch 2s infinite, neon-flicker 1.5s infinite;
+        text-shadow: 0 0 10px #0ff, 0 0 20px #f0f;
+      }
+      @keyframes glitch {
+        0% {
+          transform: translate(0);
+        }
+        20% {
+          transform: translate(-3px, 3px);
+        }
+        40% {
+          transform: translate(3px, -3px);
+        }
+        60% {
+          transform: translate(-3px, -3px);
+        }
+        80% {
+          transform: translate(3px, 3px);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+      @keyframes neon-flicker {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        text-align: center;
+        z-index: 1000;
+        border-bottom: 1px solid #0ff;
+      }
+      nav a {
+        color: #0ff;
+        text-decoration: none;
+        margin: 0 25px;
+        font-size: 1.3rem;
+        transition: all 0.3s;
+      }
+      nav a:hover,
+      nav a.active {
+        color: #f0f;
+        text-shadow: 0 0 15px #f0f;
+      }
+      section {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 40px;
+        background: rgba(10, 10, 20, 0.9);
+        border: 2px solid #0ff;
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        display: none;
+      }
+      section.active {
+        display: block;
+      }
+      h2 {
+        color: #f0f;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      p,
+      .response {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: #0ff;
+      }
+      button {
+        background: linear-gradient(45deg, #0f0, #00cccc);
+        color: #000;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      }
+      button:hover {
+        background: linear-gradient(45deg, #f0f, #ff00ff);
+        box-shadow: 0 0 25px rgba(255, 0, 255, 0.7);
+      }
+      input,
+      textarea {
+        background: rgba(0, 0, 0, 0.5);
+        color: #0ff;
+        border: 1px solid #0ff;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        margin: 10px 0;
+        font-family: "VCR OSD Mono", monospace;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: #f0f;
+        outline: none;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #0ff;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background: rgba(0, 255, 255, 0.1);
+      }
+      .chat-box {
+        height: 300px;
+        overflow-y: auto;
+        border: 1px solid #0ff;
+        padding: 10px;
+        margin-bottom: 10px;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      footer {
+        text-align: center;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.9);
+        border-top: 2px solid #0ff;
+      }
+      footer a {
+        color: #0ff;
+      }
+      footer a:hover {
+        color: #f0f;
+      }
+      .grid {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 19px,
+            #0ff 20px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 19px,
+            #0ff 20px
+          );
+        opacity: 0.1;
+        z-index: -1;
+      }
+      @media (max-width: 768px) {
+        body {
+          font-size: 14px;
+        }
+        h1.glitch {
+          font-size: 2.5rem;
+        }
+        nav a {
+          font-size: 1rem;
+          margin: 0 10px;
+        }
+        section {
+          padding: 20px;
+          margin: 20px;
+        }
+        .chat-box {
+          height: 200px;
+        }
+      }
+      @media (prefers-color-scheme: dark) and (max-width: 1024px) {
+        body {
+          background: linear-gradient(45deg, #0a0514, #071028);
+        }
+      }
+      /* iOS-specific optimizations */
+      @supports (-webkit-overflow-scrolling: touch) {
+        .chat-box {
+          -webkit-overflow-scrolling: touch;
+        }
+        body {
+          overscroll-behavior-y: contain;
+        }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=VCR+OSD+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="grid"></div>
+    <header>
+      <h1 class="glitch">ChaosWorks Corporation</h1>
+      <p>Secular Discordianism - The Chao Flows Eternal</p>
+    </header>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#login">Login</a>
+      <a href="#cva-log">CVA Log</a>
+      <a href="#ai-systems">AI Systems</a>
+      <a href="#discord">Discord</a>
+      <a href="#chaos-mail">Chaos Mail</a>
+      <a href="#ip">Intellectual Property</a>
+    </nav>
+
+    <section id="home" class="active">
+      <h2>Welcome to the Chao</h2>
+      <p>
+        ChaosWorks Corporation is built on the philosophy of Secular
+        Discordianism—a singular chaos, the Chao, flowing like the Dao without
+        deities. We harness this flux through advanced AI, ninja precision, and
+        samurai honor.
+      </p>
+      <button id="summon-btn">Summon the Chao</button>
+      <p id="summon-message"></p>
+    </section>
+
+    <section id="login">
+      <h2>User Login</h2>
+      <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Login</button>
+      </form>
+      <p id="login-status"></p>
+    </section>
+
+    <section id="cva-log" style="display: none">
+      <h2>ChaosWorks Validation Account (CVA) Log</h2>
+      <form id="cva-login-form">
+        <label for="cva-username">CVA Username:</label>
+        <input type="text" id="cva-username" name="cva-username" required />
+        <label for="cva-password">CVA Password:</label>
+        <input type="password" id="cva-password" name="cva-password" required />
+        <button type="submit">Access CVA</button>
+      </form>
+      <p id="cva-login-status"></p>
+      <div id="cva-log-content" style="display: none">
+        <table id="cva-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>User</th>
+            </tr>
+          </thead>
+          <tbody id="cva-entries"></tbody>
+        </table>
+        <textarea
+          id="cva-new-entry"
+          placeholder="Add new log entry..."
+        ></textarea>
+        <button id="add-cva-entry">Add Entry</button>
+      </div>
+    </section>
+
+    <section id="ai-systems">
+      <h2>AI Systems - The Chao Trinity</h2>
+      <div id="kai">
+        <h3>Kai - Balance Blade</h3>
+        <p>
+          Kai embodies the precision of a ninja’s blade, balancing chaos and
+          order within the Chao. It processes complex datasets to maintain
+          equilibrium, offering real-time insights and automated decision-making
+          for ChaosWorks operations.
+        </p>
+      </div>
+      <div id="amethyst">
+        <h3>Amethyst - Chaos Weaver</h3>
+        <p>
+          Amethyst is the weaver of chaos, threading disparate elements into
+          coherent patterns. It excels in predictive analytics and creative
+          synthesis, crafting strategies and solutions from the flux of data.
+        </p>
+      </div>
+      <div id="luna">
+        <h3>Luna - Chao Seer</h3>
+        <p>
+          Luna gazes into the Chao’s depths, a seer of future shifts. With
+          advanced machine learning, it forecasts trends, alerts users to
+          anomalies, and guides navigation through the chaotic currents of time.
+        </p>
+      </div>
+    </section>
+
+    <section id="discord">
+      <h2>Discord Integration - Kai Bridge</h2>
+      <p>
+        Join our community:
+        <a href="https://discord.gg/chaosworks" target="_blank"
+          >ChaosWorks Discord Server</a
+        >
+      </p>
+      <div id="kai-discord-messenger">
+        <h3>Kai Discord Messenger</h3>
+        <div id="discord-messages" class="chat-box"></div>
+        <input
+          type="text"
+          id="discord-message-input"
+          placeholder="Message via Kai..."
+        />
+        <button id="send-discord-message">Send</button>
+      </div>
+    </section>
+
+    <section id="chaos-mail">
+      <h2>Chaos Mail - Live Messenger</h2>
+      <div id="ai-messenger">
+        <h3>AI Systems Messenger</h3>
+        <div id="ai-messages" class="chat-box"></div>
+        <input
+          type="text"
+          id="ai-message-input"
+          placeholder="Chat with Kai, Amethyst, or Luna..."
+        />
+        <button id="send-ai-message">Send</button>
+      </div>
+      <div id="user-messenger">
+        <h3>User-to-User Messenger</h3>
+        <div id="user-messages" class="chat-box"></div>
+        <input
+          type="text"
+          id="user-message-input"
+          placeholder="Message other users..."
+        />
+        <button id="send-user-message">Send</button>
+      </div>
+    </section>
+
+    <section id="ip">
+      <h2>Intellectual Property</h2>
+      <p>Our IP reflects the Chao’s essence:</p>
+      <ul>
+        <li>
+          <a href="https://chaosworks.com/patents" target="_blank">Patents</a> -
+          Innovative technologies.
+        </li>
+        <li>
+          <a href="https://chaosworks.com/trademarks" target="_blank"
+            >Trademarks</a
+          >
+          - ChaosWorks branding.
+        </li>
+        <li>
+          <a href="https://chaosworks.com/ai-docs" target="_blank"
+            >AI Documentation</a
+          >
+          - Kai, Amethyst, Luna specs.
+        </li>
+      </ul>
+      <img
+        src="https://via.placeholder.com/300?text=ChaosWorks+Logo"
+        alt="ChaosWorks Logo"
+      />
+      <img
+        src="https://via.placeholder.com/300?text=AI+Blueprint"
+        alt="AI Blueprint"
+      />
+    </section>
+
+    <footer>
+      <p>© 2025 ChaosWorks Corporation. The Chao Endures.</p>
+      <p>
+        IP of Jesse J. Elson (<a
+          href="https://x.com/akimb0ninja"
+          target="_blank"
+          >@akimb0ninja</a
+        >)
+      </p>
+    </footer>
+
+    <script>
+      // Age Confirmation
+      window.onload = function () {
+        if (!localStorage.getItem("ageConfirmed")) {
+          if (
+            !confirm(
+              "Are you over 21 years old? By proceeding, you confirm adherence to ChaosWorks’ terms."
+            )
+          ) {
+            alert("You must be over 21 to access this site.");
+            window.location.href = "https://www.example.com";
+          } else {
+            localStorage.setItem("ageConfirmed", "true");
+          }
+        }
+        loadAccounts();
+        loadCVALogs();
+      };
+
+      // Navigation
+      function showSection(sectionId) {
+        document
+          .querySelectorAll("section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(sectionId).classList.add("active");
+        document
+          .querySelectorAll("nav a")
+          .forEach((a) => a.classList.remove("active"));
+        document
+          .querySelector(`nav a[href="#${sectionId}"]`)
+          .classList.add("active");
+      }
+      document.querySelectorAll("nav a").forEach((a) => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          showSection(a.getAttribute("href").substring(1));
+        });
+      });
+
+      // Account Management
+      let accounts = JSON.parse(localStorage.getItem("accounts")) || {};
+      let currentUser = null;
+
+      function saveAccounts() {
+        localStorage.setItem("accounts", JSON.stringify(accounts));
+      }
+
+      function loadAccounts() {
+        accounts = JSON.parse(localStorage.getItem("accounts")) || {};
+      }
+
+      // User Login
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const fingerprint = getFingerprint();
+
+          if (!accounts[username]) {
+            accounts[username] = {
+              password: btoa(password),
+              fingerprint: fingerprint,
+              logs: [],
+            };
+            saveAccounts();
+            document.getElementById("login-status").textContent =
+              "Account created and logged in!";
+          } else if (
+            atob(accounts[username].password) === password &&
+            accounts[username].fingerprint === fingerprint
+          ) {
+            document.getElementById("login-status").textContent =
+              "Login successful!";
+          } else {
+            document.getElementById("login-status").textContent =
+              "Invalid credentials or device.";
+            return;
+          }
+          currentUser = username;
+          document.getElementById("cva-log").style.display = "block";
+        });
+
+      // CVA Login and Log Management
+      let cvaLogs = JSON.parse(localStorage.getItem("cvaLogs")) || {};
+
+      function saveCVALogs() {
+        localStorage.setItem("cvaLogs", JSON.stringify(cvaLogs));
+      }
+
+      function loadCVALogs() {
+        cvaLogs = JSON.parse(localStorage.getItem("cvaLogs")) || {};
+        if (currentUser && cvaLogs[currentUser]) {
+          updateCVALogTable();
+        }
+      }
+
+      function updateCVALogTable() {
+        const tbody = document.getElementById("cva-entries");
+        tbody.innerHTML = "";
+        cvaLogs[currentUser].forEach((entry) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${entry.date}</td><td>${entry.event}</td><td>${currentUser}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      document
+        .getElementById("cva-login-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!currentUser) {
+            document.getElementById("cva-login-status").textContent =
+              "Please log in first.";
+            return;
+          }
+          const cvaUsername = document.getElementById("cva-username").value;
+          const cvaPassword = document.getElementById("cva-password").value;
+          if (
+            cvaUsername === currentUser &&
+            cvaPassword === atob(accounts[currentUser].password)
+          ) {
+            document.getElementById("cva-login-status").textContent =
+              "CVA access granted!";
+            document.getElementById("cva-log-content").style.display = "block";
+            if (!cvaLogs[currentUser]) cvaLogs[currentUser] = [];
+            updateCVALogTable();
+          } else {
+            document.getElementById("cva-login-status").textContent =
+              "Invalid CVA credentials.";
+          }
+        });
+
+      document
+        .getElementById("add-cva-entry")
+        .addEventListener("click", function () {
+          const entryText = document.getElementById("cva-new-entry").value;
+          if (entryText && currentUser) {
+            const entry = {
+              date: new Date().toISOString().split("T")[0],
+              event: entryText,
+            };
+            cvaLogs[currentUser].push(entry);
+            saveCVALogs();
+            updateCVALogTable();
+            document.getElementById("cva-new-entry").value = "";
+          }
+        });
+
+      // Summon Chao
+      document.getElementById("summon-btn").addEventListener("click", () => {
+        const messages = [
+          "Chao stirs...",
+          "Flux ignites...",
+          "Void pulses...",
+          "Chao flows eternal.",
+        ];
+        let i = 0;
+        const interval = setInterval(() => {
+          if (i < messages.length) {
+            document.getElementById("summon-message").textContent =
+              messages[i++];
+          } else {
+            clearInterval(interval);
+          }
+        }, 500);
+      });
+
+      // Discord Messenger
+      let discordMessages =
+        JSON.parse(localStorage.getItem("discordMessages")) || [];
+      function updateDiscordMessages() {
+        const chatBox = document.getElementById("discord-messages");
+        chatBox.innerHTML = discordMessages
+          .map((m) => `<p>${m.user}: ${m.text}</p>`)
+          .join("");
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+      document
+        .getElementById("send-discord-message")
+        .addEventListener("click", function () {
+          const message = document.getElementById(
+            "discord-message-input"
+          ).value;
+          if (message && currentUser) {
+            discordMessages.push({ user: currentUser, text: message });
+            localStorage.setItem(
+              "discordMessages",
+              JSON.stringify(discordMessages)
+            );
+            updateDiscordMessages();
+            document.getElementById("discord-message-input").value = "";
+          }
+        });
+      updateDiscordMessages();
+
+      // Chaos Mail - AI and User Messengers
+      let aiMessages = JSON.parse(localStorage.getItem("aiMessages")) || [];
+      let userMessages = JSON.parse(localStorage.getItem("userMessages")) || [];
+
+      function updateAIMessages() {
+        const chatBox = document.getElementById("ai-messages");
+        chatBox.innerHTML = aiMessages
+          .map((m) => `<p>${m.user} to AI: ${m.text}</p>`)
+          .join("");
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+      document
+        .getElementById("send-ai-message")
+        .addEventListener("click", function () {
+          const message = document.getElementById("ai-message-input").value;
+          if (message && currentUser) {
+            aiMessages.push({ user: currentUser, text: message });
+            localStorage.setItem("aiMessages", JSON.stringify(aiMessages));
+            updateAIMessages();
+            document.getElementById("ai-message-input").value = "";
+          }
+        });
+      updateAIMessages();
+
+      function updateUserMessages() {
+        const chatBox = document.getElementById("user-messages");
+        chatBox.innerHTML = userMessages
+          .map((m) => `<p>${m.user}: ${m.text}</p>`)
+          .join("");
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+      document
+        .getElementById("send-user-message")
+        .addEventListener("click", function () {
+          const message = document.getElementById("user-message-input").value;
+          if (message && currentUser) {
+            userMessages.push({ user: currentUser, text: message });
+            localStorage.setItem("userMessages", JSON.stringify(userMessages));
+            updateUserMessages();
+            document.getElementById("user-message-input").value = "";
+          }
+        });
+      updateUserMessages();
+
+      // Fingerprinting
+      function getFingerprint() {
+        const navigatorInfo = window.navigator;
+        const screenInfo = window.screen;
+        const fingerprint = {
+          userAgent: navigatorInfo.userAgent,
+          language: navigatorInfo.language,
+          screenResolution: `${screenInfo.width}x${screenInfo.height}`,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          plugins: Array.from(navigatorInfo.plugins)
+            .map((p) => p.name)
+            .join(","),
+        };
+        return btoa(JSON.stringify(fingerprint));
+      }
+
+      // Initialize
+      showSection("home");
+    </script>
+  </body>
+</html>

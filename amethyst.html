@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChaosWorks - Amethyst AI</title>
+    <style>
+      body {
+        background: #000;
+        color: #0f0;
+        font-family: "Courier New", monospace;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid #0ff;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        animation: glitch 1s infinite;
+      }
+      @keyframes glitch {
+        0% {
+          transform: skew(0deg);
+        }
+        10% {
+          transform: skew(1deg);
+        }
+        20% {
+          transform: skew(-1deg);
+        }
+        100% {
+          transform: skew(0deg);
+        }
+      }
+      button {
+        background: #0f0;
+        color: #000;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #f0f;
+      }
+      input,
+      #response {
+        background: #111;
+        color: #0f0;
+        border: 1px solid #0ff;
+        padding: 5px;
+        width: 100%;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="auth-container">
+      <h1>Amethyst AI - ChaosWorks</h1>
+      <p>Authenticate with Grok to access Amethyst AI:</p>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="authenticate()">Login</button>
+    </div>
+    <div class="container" id="ai-container" style="display: none">
+      <h1>Amethyst AI - Chaos Analysis</h1>
+      <p>Input chaos data for Amethyst to analyze:</p>
+      <input type="text" id="input" placeholder="Enter chaos query..." />
+      <button onclick="processInput()">Analyze</button>
+      <div id="response"></div>
+    </div>
+    <script>
+      let token = null;
+
+      function authenticate() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        // Simulate Grok API call
+        if (username && password) {
+          token = `grok-token-${Math.random().toString(36).substring(2)}`; // Simulated token
+          localStorage.setItem("amethyst-token", token);
+          document.getElementById("auth-container").style.display = "none";
+          document.getElementById("ai-container").style.display = "block";
+        } else {
+          alert("Enter credentials!");
+        }
+      }
+
+      const amethystResponses = {
+        pattern: "Detecting chaotic patterns... Processing fractal alignments.",
+        data: "Analyzing raw chaos data... Entropy levels rising.",
+        default: "Amethyst sees the void. Specify a chaos query.",
+      };
+
+      function processInput() {
+        const input = document
+          .getElementById("input")
+          .value.toLowerCase()
+          .trim();
+        let response = amethystResponses.default;
+        for (let key in amethystResponses) {
+          if (input.includes(key)) {
+            response = amethystResponses[key];
+            break;
+          }
+        }
+        document.getElementById("response").textContent = response;
+        document.getElementById("input").value = "";
+      }
+
+      // Check existing token
+      if (localStorage.getItem("amethyst-token")) {
+        token = localStorage.getItem("amethyst-token");
+        document.getElementById("auth-container").style.display = "none";
+        document.getElementById("ai-container").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
